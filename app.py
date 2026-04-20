@@ -914,6 +914,6 @@ else:
 st.markdown("""
     <div class="footer">
         <p>Proyecto ApS 25-26/33 Interpretación Musical y Prevención de la Violencia de Genero</p>
-        <p style='margin-top: 10px;'>© 2024 Departamento de Musicología</p>
+        <p style='margin-top: 10px;'>https://musicologiafeminista.usal.es/</p>
     </div>
     """, unsafe_allow_html=True)
