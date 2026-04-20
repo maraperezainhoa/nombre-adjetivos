@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Aplicación web con Streamlit para análisis de adjetivos musicales
-Diseño elegante académico similar a musicologia.usal.es
+Diseño elegante académico con modo oscuro completo
 """
 
 import streamlit as st
@@ -153,7 +153,7 @@ def generar_pdf_resultados(resultados, adj_musicales, adj_fisicos, ratio, porcen
         'CustomTitle',
         parent=styles['Heading1'],
         fontSize=24,
-        textColor=colors.HexColor('#1a3a3a'),
+        textColor=colors.HexColor("#1F1F1F"),
         spaceAfter=30,
         alignment=TA_CENTER,
         fontName='Helvetica-Bold'
@@ -198,14 +198,13 @@ def generar_pdf_resultados(resultados, adj_musicales, adj_fisicos, ratio, porcen
     stats_table = Table(stats_data, colWidths=[3*inch, 2*inch])
     stats_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2d5a5a')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('FONTSIZE', (0, 0), (-1, 0), 12),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#f5f5f5')),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#cccccc')),
-        ('FONTSIZE', (0, 1), (-1, -1), 10),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor("#f5f5f5")),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#404040')),
     ]))
     
     story.append(stats_table)
@@ -221,12 +220,12 @@ def generar_pdf_resultados(resultados, adj_musicales, adj_fisicos, ratio, porcen
         musicales_table = Table(musicales_data, colWidths=[0.5*inch, 3*inch, 1.5*inch])
         musicales_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#8b6f47')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, 0), 11),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#cccccc')),
+            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#404040')),
             ('FONTSIZE', (0, 1), (-1, -1), 9),
         ]))
         story.append(musicales_table)
@@ -244,12 +243,12 @@ def generar_pdf_resultados(resultados, adj_musicales, adj_fisicos, ratio, porcen
         fisicos_table = Table(fisicos_data, colWidths=[0.5*inch, 3*inch, 1.5*inch])
         fisicos_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#6b5b4a')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, 0), 11),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#cccccc')),
+            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#404040')),
             ('FONTSIZE', (0, 1), (-1, -1), 9),
         ]))
         story.append(fisicos_table)
@@ -263,13 +262,13 @@ def generar_pdf_resultados(resultados, adj_musicales, adj_fisicos, ratio, porcen
 # ==================== CONFIGURACIÓN STREAMLIT ====================
 
 st.set_page_config(
-    page_title="Análisis de Adjetivos Musicales | USAL",
-    page_icon="🎵",
+    page_title="Análisis de Adjetivos Musicales",
+    page_icon="♪",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# CSS personalizado - Diseño académico elegante
+# CSS personalizado - Diseño académico elegante con modo oscuro completo
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Lora:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
@@ -278,13 +277,29 @@ st.markdown("""
         font-family: 'Lora', serif;
     }
     
-    html, body, .main {
-        background: linear-gradient(180deg, #fafaf8 0%, #f5f3f0 100%);
-        color: #2c2c2c;
+    html, body {
+        background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
+        color: #f0f0f0;
+    }
+    
+    .main {
+        background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
     }
     
     .stApp {
-        background: transparent;
+        background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
+    }
+    
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
+    }
+    
+    [data-testid="stScriptRunState"] {
+        display: none;
+    }
+    
+    .block-container {
+        background: transparent !important;
     }
     
     /* Header Principal */
@@ -294,13 +309,14 @@ st.markdown("""
         text-align: center;
         border-bottom: 4px solid #8b6f47;
         margin-bottom: 40px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        border-radius: 8px;
     }
     
     .header-title {
         font-family: 'Playfair Display', serif;
         font-size: 48px;
-        color: #f5f3f0;
+        color: #f0f0f0;
         margin: 0;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         letter-spacing: 2px;
@@ -309,7 +325,7 @@ st.markdown("""
     .header-subtitle {
         font-family: 'Crimson Text', serif;
         font-size: 22px;
-        color: #d4c5b9;
+        color: #d0d0d0;
         margin-top: 15px;
         font-style: italic;
         letter-spacing: 1px;
@@ -324,13 +340,13 @@ st.markdown("""
     
     /* Sidebar */
     .css-1d58n96 {
-        background: linear-gradient(180deg, #f5f3f0 0%, #ede9e4 100%);
+        background: linear-gradient(180deg, #0d0d0d 0%, #000000 100%);
     }
     
     .sidebar-title {
         font-family: 'Playfair Display', serif;
         font-size: 24px;
-        color: #1a3a3a;
+        color: #f0f0f0;
         border-bottom: 2px solid #8b6f47;
         padding-bottom: 10px;
         margin-bottom: 20px;
@@ -340,7 +356,7 @@ st.markdown("""
     .section-title {
         font-family: 'Playfair Display', serif;
         font-size: 32px;
-        color: #1a3a3a;
+        color: #f0f0f0;
         margin-top: 40px;
         margin-bottom: 25px;
         padding-bottom: 15px;
@@ -351,31 +367,31 @@ st.markdown("""
     .section-subtitle {
         font-family: 'Lora', serif;
         font-size: 18px;
-        color: #2d5a5a;
+        color: #d0d0d0;
         margin-bottom: 20px;
         font-weight: 600;
     }
     
     /* Métricas */
     .metric-card {
-        background: white;
-        border: 2px solid #e0d5cc;
+        background: #1a1a1a;
+        border: 2px solid #333333;
         padding: 25px;
         border-radius: 3px;
         text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         transition: all 0.3s ease;
     }
     
     .metric-card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(139, 111, 71, 0.3);
         border-color: #8b6f47;
     }
     
     .metric-label {
         font-family: 'Crimson Text', serif;
         font-size: 14px;
-        color: #666;
+        color: #d0d0d0;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 10px;
@@ -384,28 +400,29 @@ st.markdown("""
     .metric-value {
         font-family: 'Playfair Display', serif;
         font-size: 36px;
-        color: #1a3a3a;
+        color: #f0f0f0;
         font-weight: bold;
     }
     
     /* Info boxes */
     .info-box {
-        background: #f0ebe4;
+        background: #1a1a1a;
         border-left: 4px solid #8b6f47;
         padding: 20px;
         border-radius: 3px;
         margin: 15px 0;
         font-size: 16px;
+        color: #f0f0f0;
     }
     
     .info-box-musical {
         border-left-color: #8b6f47;
-        background: #fffbf5;
+        background: #1a1510;
     }
     
     .info-box-fisico {
         border-left-color: #6b5b4a;
-        background: #faf8f5;
+        background: #0f0e0c;
     }
     
     /* Botones */
@@ -413,7 +430,7 @@ st.markdown("""
         font-family: 'Lora', serif;
         font-size: 14px;
         background: #1a3a3a;
-        color: #f5f3f0;
+        color: #f0f0f0;
         border: none;
         padding: 12px 24px;
         border-radius: 3px;
@@ -425,7 +442,7 @@ st.markdown("""
     
     .stButton > button:hover {
         background: #8b6f47;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
     
     .stButton > button[type="primary"] {
@@ -439,20 +456,22 @@ st.markdown("""
     /* Input */
     .stTextInput > div > div > input {
         font-family: 'Lora', serif;
-        border: 2px solid #e0d5cc;
+        border: 2px solid #404040;
         border-radius: 3px;
         font-size: 16px;
+        background: #1a1a1a;
+        color: #f0f0f0;
     }
     
     .stTextInput > div > div > input:focus {
         border-color: #8b6f47;
-        box-shadow: 0 0 0 2px rgba(139, 111, 71, 0.1);
+        box-shadow: 0 0 0 2px rgba(139, 111, 71, 0.3);
     }
     
     /* File uploader */
     .stFileUploader {
-        background: #fffbf5;
-        border: 2px dashed #d4c5b9;
+        background: #1a1a1a;
+        border: 2px dashed #404040;
         border-radius: 3px;
         padding: 20px;
     }
@@ -460,17 +479,18 @@ st.markdown("""
     /* DataFrames */
     .stDataFrame {
         font-family: 'Lora', serif;
+        background: #1a1a1a !important;
     }
     
     /* Tables */
     table {
-        background: white;
+        background: #1a1a1a !important;
         border-collapse: collapse;
     }
     
     th {
-        background: #2d5a5a;
-        color: #f5f3f0;
+        background: #2d5a5a !important;
+        color: #f0f0f0 !important;
         padding: 12px;
         font-weight: 600;
         text-align: center;
@@ -478,23 +498,26 @@ st.markdown("""
     
     td {
         padding: 10px;
-        border-bottom: 1px solid #e0d5cc;
+        border-bottom: 1px solid #404040;
+        color: #f0f0f0 !important;
+        background: #1a1a1a !important;
     }
     
     tr:hover {
-        background: #f5f3f0;
+        background: #252525 !important;
     }
     
     /* Expandable sections */
     .streamlit-expanderHeader {
-        background: #f0ebe4;
-        border: 1px solid #d4c5b9;
+        background: #1a1a1a;
+        border: 1px solid #404040;
+        color: #f0f0f0;
     }
     
     /* Download buttons */
     .stDownloadButton > button {
         background: #2d5a5a;
-        color: white;
+        color: #f0f0f0;
     }
     
     .stDownloadButton > button:hover {
@@ -504,43 +527,43 @@ st.markdown("""
     /* Footer */
     .footer {
         text-align: center;
-        color: #999;
+        color: #808080;
         font-size: 12px;
         margin-top: 60px;
         padding-top: 20px;
-        border-top: 1px solid #e0d5cc;
+        border-top: 1px solid #404040;
         font-family: 'Crimson Text', serif;
     }
     
     /* Info y advertencias */
     .stAlert {
-        background: #f0ebe4;
-        border: 2px solid #d4c5b9;
+        background: #1a1a1a;
+        border: 2px solid #404040;
         border-radius: 3px;
     }
     
     .stSuccess {
-        background: #e8f5e9;
-        border: 2px solid #8b6f47;
+        background: #1a3a2a;
+        border: 2px solid #4caf50;
     }
     
     .stError {
-        background: #ffebee;
-        border: 2px solid #c62828;
+        background: #3a1a1a;
+        border: 2px solid #f44336;
     }
     
     /* Gráficos */
     .plotly-graph-div {
-        background: white;
+        background: transparent !important;
         border-radius: 3px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     
     /* Search bar */
     .search-container {
-        background: white;
+        background: #1a1a1a;
         padding: 20px;
-        border: 2px solid #e0d5cc;
+        border: 2px solid #404040;
         border-radius: 3px;
         margin-bottom: 30px;
     }
@@ -561,7 +584,7 @@ st.markdown("""
 
 with st.sidebar:
     st.markdown("""
-        <h2 class="sidebar-title">📁 Cargar Documentos</h2>
+        <h2 class="sidebar-title">Cargar Documentos</h2>
         """, unsafe_allow_html=True)
     
     uploaded_files = st.file_uploader(
@@ -572,7 +595,7 @@ with st.sidebar:
     )
     
     st.markdown("""
-        <div style='background: #fffbf5; border-left: 4px solid #8b6f47; padding: 12px; margin-top: 15px; border-radius: 3px;'>
+        <div style='background: #1a1510; border-left: 4px solid #8b6f47; padding: 12px; margin-top: 15px; border-radius: 3px; color: #d0d0d0;'>
         <p style='margin: 0; font-size: 14px;'><strong>ℹ️ Formatos soportados:</strong></p>
         <p style='margin: 5px 0 0 0; font-size: 13px;'>• Archivos de texto (.txt)<br>• Documentos PDF</p>
         </div>
@@ -605,30 +628,30 @@ if uploaded_files:
             st.session_state.archivos_procesados.append({
                 'Archivo': nombre,
                 'Tipo': 'PDF' if file.type == 'application/pdf' else 'TXT',
-                'Estado': '✅ Procesado'
+                'Estado': 'Procesado'
             })
             procesados_exitosos += 1
         else:
             st.session_state.archivos_procesados.append({
                 'Archivo': nombre,
                 'Tipo': 'PDF' if file.type == 'application/pdf' else 'TXT',
-                'Estado': '❌ Error'
+                'Estado': 'Error'
             })
             procesados_fallidos += 1
     
     with st.sidebar:
         if procesados_exitosos > 0:
-            st.success(f"✅ {procesados_exitosos} archivo(s) procesado(s)")
+            st.success(f"{procesados_exitosos} archivo(s) procesado(s)")
         
         if procesados_fallidos > 0:
-            st.error(f"❌ {procesados_fallidos} archivo(s) con error")
+            st.error(f"{procesados_fallidos} archivo(s) con error")
         
-        with st.expander("📊 Archivos cargados"):
+        with st.expander("Archivos cargados"):
             df_archivos = pd.DataFrame(st.session_state.archivos_procesados)
             st.dataframe(df_archivos, use_container_width=True, hide_index=True)
         
         if st.session_state.textos:
-            with st.expander("📈 Estadísticas"):
+            with st.expander("Estadísticas"):
                 total_caracteres = sum(len(t) for t in st.session_state.textos)
                 total_palabras = sum(len(t.split()) for t in st.session_state.textos)
                 
@@ -644,7 +667,7 @@ if uploaded_files:
 if st.session_state.textos:
     
     # Barra de búsqueda
-    st.markdown('<h2 class="section-title">🔍 Búsqueda y Análisis</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">Búsqueda y Análisis</h2>', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([2, 1, 1])
     
@@ -656,10 +679,10 @@ if st.session_state.textos:
         )
     
     with col2:
-        buscar_btn = st.button("🔍 Buscar", use_container_width=True, type="primary")
+        buscar_btn = st.button("Buscar", use_container_width=True, type="primary")
     
     with col3:
-        limpiar_btn = st.button("🗑️ Limpiar", use_container_width=True)
+        limpiar_btn = st.button("Limpiar", use_container_width=True)
     
     if limpiar_btn:
         st.session_state.ultima_busqueda = None
@@ -696,7 +719,7 @@ if st.session_state.textos:
             st.error(f"No se encontraron resultados para '{resultados['nombre']}'")
         else:
             # Estadísticas
-            st.markdown('<h2 class="section-title">📊 Resultados</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">Resultados</h2>', unsafe_allow_html=True)
             
             col1, col2, col3, col4 = st.columns(4)
             
@@ -733,7 +756,7 @@ if st.session_state.textos:
                     """, unsafe_allow_html=True)
             
             # Distribución
-            st.markdown('<h2 class="section-title">📈 Distribución</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">Distribución</h2>', unsafe_allow_html=True)
             
             col1, col2 = st.columns(2)
             
@@ -752,7 +775,7 @@ if st.session_state.textos:
                     """, unsafe_allow_html=True)
             
             # Descargas
-            st.markdown('<h2 class="section-title">📥 Descargar Resultados</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">Descargar Resultados</h2>', unsafe_allow_html=True)
             
             col1, col2, col3 = st.columns(3)
             
@@ -777,7 +800,7 @@ if st.session_state.textos:
                 df_musicales = pd.DataFrame(adj_musicales, columns=['Adjetivo', 'Frecuencia'])
                 csv_m = df_musicales.to_csv(index=False)
                 st.download_button(
-                    "🎵 CSV Musicales",
+                    "CSV Musicales",
                     csv_m,
                     f"musicales_{resultados['nombre'].replace(' ', '_')}.csv",
                     "text/csv",
@@ -788,7 +811,7 @@ if st.session_state.textos:
                 df_fisicos = pd.DataFrame(adj_fisicos, columns=['Adjetivo', 'Frecuencia'])
                 csv_f = df_fisicos.to_csv(index=False)
                 st.download_button(
-                    "👤 CSV Físicos",
+                    "CSV Físicos",
                     csv_f,
                     f"fisicos_{resultados['nombre'].replace(' ', '_')}.csv",
                     "text/csv",
@@ -796,7 +819,7 @@ if st.session_state.textos:
                 )
             
             # Gráficos
-            st.markdown('<h2 class="section-title">📊 Visualización</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">Visualización</h2>', unsafe_allow_html=True)
             
             col1, col2 = st.columns(2)
             
@@ -819,9 +842,9 @@ if st.session_state.textos:
                     fig_m.update_layout(
                         height=400,
                         showlegend=True,
-                        font=dict(size=11, family='Lora, serif'),
+                        font=dict(size=11, family='Lora, serif', color='#f0f0f0'),
                         plot_bgcolor='rgba(0,0,0,0)',
-                        paper_bgcolor='rgba(250,248,245,0)',
+                        paper_bgcolor='rgba(26,26,26,0)',
                         margin=dict(l=0, r=0, t=0, b=0)
                     )
                     st.plotly_chart(fig_m, use_container_width=True)
@@ -845,15 +868,15 @@ if st.session_state.textos:
                     fig_f.update_layout(
                         height=400,
                         showlegend=True,
-                        font=dict(size=11, family='Lora, serif'),
+                        font=dict(size=11, family='Lora, serif', color='#f0f0f0'),
                         plot_bgcolor='rgba(0,0,0,0)',
-                        paper_bgcolor='rgba(250,248,245,0)',
+                        paper_bgcolor='rgba(26,26,26,0)',
                         margin=dict(l=0, r=0, t=0, b=0)
                     )
                     st.plotly_chart(fig_f, use_container_width=True)
             
             # Listados
-            st.markdown('<h2 class="section-title">📋 Detalle de Resultados</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">Detalle de Resultados</h2>', unsafe_allow_html=True)
             
             col1, col2 = st.columns(2)
             
@@ -878,10 +901,10 @@ if st.session_state.textos:
 else:
     st.markdown("""
         <div style='text-align: center; padding: 60px 40px;'>
-            <p style='font-family: Crimson Text, serif; font-size: 20px; color: #666; margin: 0;'>
+            <p style='font-family: Crimson Text, serif; font-size: 20px; color: #d0d0d0; margin: 0;'>
                 Comienza cargando documentos en la barra lateral
             </p>
-            <p style='font-family: Lora, serif; font-size: 16px; color: #999; margin-top: 20px;'>
+            <p style='font-family: Lora, serif; font-size: 16px; color: #808080; margin-top: 20px;'>
                 Soporta archivos de texto (.txt) y PDF
             </p>
         </div>
